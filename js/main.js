@@ -10,9 +10,12 @@
 // TODO: Prompt the user for what kind of bread they would like.
 // Ideally, that would look something like: "What kind of bread (white, wheat, flat)?"
 
-
+let bread = prompt ("What kind of bread would you like? (white, wheat, honey-oat, wholegrain)",`white`)
 
 // TODO: Prompt the user for what kind of meat(s) they would like.
+
+let meat = prompt ("What kind of meat would you like? (More than one kind meat may be added with use of comma)",`chicken, ham, beef`)
+
 // Indicate they should separate multiple items with a comma:
 // "What kind of meat? (Separate meats with a comma if you would like more than one.)"
 
@@ -22,11 +25,12 @@
 // We expect this to be multiple, so ask them to provide you with a
 // comma-separated list using a user friendly prompt.
 
-
+let topping = prompt ("What kind of topping would you like? (Multiple topping can be added with use of comma)",`lettuce, tomato, cheese`)
 
 // TODO: Prompt the user for what kind of condiments they would like.
 // Again, we should expect a comma-separated list if items here.
 
+let condiment = prompt ("What kind of condiments would you like? (Multiple condiments can be added with use of comma)",`mustard, mayonnaise, pepper`)
 
 
 // Step Two ////////////////////////////////////////////////////////////
@@ -45,28 +49,28 @@ let prices = {
 
 // TODO: Convert order information from Strings to Arrays.
 
-let meatArray = null;
-let toppingArray = null;
-let condimentArray = null;
+let meatArray = meat.split(',');
+let toppingArray = topping.split(',');
+let condimentArray = condiment.split(',');
 
 // TODO: Calculate cost for meat, toppings, and condiments.
 // This requires you to determine the length of each Array you just made
 // and multiply out the costs. You will need to refer to the attributes of the
 // `prices` object in order to calculate these costs.
 
-let meatCost = null;
-let toppingCost = null;
-let condimentCost = null;
+let meatCost = meatArray.length * prices.meat;
+let toppingCost = toppingArray.length * prices.topping;
+let condimentCost = condimentArray.length * prices.condiment;
 
 // TODO: Combine the costs of each part of the sandwich to get the subtotal.
-let subtotal = null;
+let subtotal = meatCost + toppingCost + condimentCost + prices.sandwich;
 
 // TODO: Calculate the tax owed using the waStateTaxRate.
-let waStateTaxRate = 0.065;
-let orderTax = null;
+let waStateTaxRate = 0.10;
+let orderTax = subtotal * waStateTaxRate;
 
 // TODO: Calculate `totalPrice` by adding `subtotal` and `orderTax`.
-let totalPrice = null;
+let totalPrice = subtotal + orderTax;
 
 
 // Step Three //////////////////////////////////////////////////////////
@@ -78,20 +82,20 @@ let totalPrice = null;
 
 let receiptTemplate = `
     <p>SANDWICH ORDER</p>
-    <p>Bread: wheat</p>
-    <p>Meat: ham, turkey</p>
-    <p>Toppings: lettuce, tomato, peppers, spinach</p>
-    <p>Condiments: mayo, mustard, thousand island</p>
+    <p>Bread: ${bread}</p>
+    <p>Meat: ${meat}</p>
+    <p>Toppings: ${topping}</p>
+    <p>Condiments: ${condiment}</p>
     <p>---------------------</p>
-    <p class="text-right">Sandwich: $4.42</p>
-    <p class="text-right">Meat: $2.00</p>
-    <p class="text-right">Toppings: $2.00</p>
-    <p class="text-right">Condiments: $1.42</p>
+    <p class="text-right">Sandwich: ${prices.sandwich.toFixed(2)}</p>
+    <p class="text-right">Meat: ${meatCost.toFixed(2)}</p>
+    <p class="text-right">Toppings: ${toppingCost.toFixed(2)}</p>
+    <p class="text-right">Condiments: ${condimentCost.toFixed(2)}</p>
     <p class="text-right">--------</p>
-    <p class="text-right">Subtotal: $9.84</p>
-    <p class="text-right">Tax: $1.42</p>
+    <p class="text-right">Subtotal: ${subtotal.toFixed(2)}</p>
+    <p class="text-right">Tax: ${orderTax.toFixed(2)}</p>
     <p class="text-right">--------</p>
-    <p class="text-right">Total: $4.84</p>
+    <p class="text-right">Total: ${totalPrice.toFixed(2)}</p>
 `
 
 ///////////////////////////////////////////////////////////////////////
